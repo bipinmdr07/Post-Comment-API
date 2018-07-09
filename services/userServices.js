@@ -1,37 +1,26 @@
-const db = require('../db');
+const User = require('../models/User');
 
 exports.getAllUsers = () => {
-  let user = db('users').select();
-  console.log(user);
-  return user
+  let response = User.getAllUsers();
+  return response;
 }
 
 exports.addNewUser = (data) => {
-  // console.log(data);
-  let x = db('users').insert(data, 'id');
-  // console.log(x.error);
-  // if (x.error !== 'undefined') {
-  //   // throw x.error.detail
-  //   // console.log()
-  // }
-  // return x;
-  x.then((response) => {
-    console.log(response);
-    return response;
-  })
-  .catch((error) => {
-    throw new Error(error);
-  })
+  let response = User.addNewUser(data)
+  return response;
 }
 
 exports.getUser = (id) => {
-  let user = db('users').select().where('id', id);
+  let response = User.getUser(id);
+  return response;
 }
 
-exports.updateUser = (id, data) => {
-  let user = db('users').select().where('id', id).update(data, [id]);
+exports.updateUser = (id) => {
+  let response = User.updateUser(id);
+  return response;
 }
 
 exports.deleteUser = (id) => {
-  let user = db('users').select().where('id', id).del();
+  let response = User.deleteUser(id);
+  return response;
 }

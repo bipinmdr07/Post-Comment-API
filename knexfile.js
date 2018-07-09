@@ -1,13 +1,13 @@
-// Update with your config settings.
+require('dotenv').config({path: `${__dirname}/.env`});
 
 module.exports = {
 
   development: {
-    client: 'pg',
+    client: process.env.DB_CLIENT,
     connection: {
-      database: 'post_comment_db',
-      user: 'postgres',
-      password: 'password'
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD
     },
     migrations: {
       directory: './migrations'
