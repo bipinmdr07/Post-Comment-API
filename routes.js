@@ -11,7 +11,7 @@ const auth = require('./libs/auth');
 
 router.get('/', (request, response) => {
   response  .json({
-    AppName: "Post Comment Authorization",
+    AppName: process.env.APP_NAME,
   });
 });
 
