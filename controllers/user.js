@@ -3,67 +3,50 @@ const userService = require('../services/userServices');
 const bcrypt = require('bcrypt');
 
 // getting all users
-router.get('/', (request, response) => {
-  userService
-    .getAllUsers()
-    .then((data) => {
-      response.status(200).json({ data });
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
+router.get('/', async (request, response) => {
+  try {
+    response.status(200).json(await userService.getAllUsers());
+  } catch (err) {
+    response.status(500).json({ err });
+  }
 });
 
 // adding new user
-router.post('/', (request, response) => {
-  request.body.password = bcrypt.hashSync(request.body.password, 10);
-  userService
-    .addNewUser(request.body) 
-    .then((data) => {
-      return userService.getUser(data[0]);
-    })
-    .then((user) => {
-      response.status(200).json( user[0] );
-    })
-    .catch((error) => {
-      response.status(500).json({ error: error.detail });
-    });
+router.post('/', async (request, response) => {
+  const data = request.body;
+  data.password = bcrypt.hashSync(data.password, 10);
+  try {
+    response.status(201).json(await userService.addNewUser(data));
+  } catch (err) {
+    response.status(502).json({ err });
+  }
 });
 
 // getting particular user
-router.get('/:id', (request, response) => {
-  userService
-    .getUser(request.params.id)
-    .then((data) => {
-      response.status(200).json({ data });
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
+router.get('/:id', async (request, response) => {
+  try {
+    response.status(200).json(await userService.getUser(request.params.id));
+  } catch (err) {
+    response.status(404).json({ err });
+  }
 });
 
 //updating particular user
-router.put('/:id', (request, response) => {
-  userService
-    .updateUser(request.params.id)
-    .then((data) => {
-      response.status(200).json({ data });
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
+router.put('/:id', async (request, response) => {
+  try {
+    response.status(200).json(await userService.updateUser(request.params.id, request.body));
+  } catch (err) {
+    response.status(304).json({ err });
+  }
 });
 
 // deleting particular user
-router.delete(':/id', (request, response) => {
-  userService
-    .deleteUser(request.params.id)
-    .then((data) => {
-      response.status(200).json({ data });
-    })
-    .catch((error) => {
-      response.status(500).json({ error });
-    });
+router.delete(':/id', async (request, response) => {
+  try {
+    response.json(await userService.deleteUser(request.params.id));
+  } catch (err) {
+    response.status(304).json({ err });
+  }
 });
 
 module.exports = router;
