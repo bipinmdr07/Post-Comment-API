@@ -16,12 +16,18 @@ router.get('/', (request, response) => {
 // adding new user
 router.post('/', (request, response) => {
   userService
-    .addNewUser(request.body)
-    .then((data) => {
-      response.status(200).json({ data });
+    .addNewUser(request.body) 
+    .then(async (data) => {
+      // console.log(data);
+      const id = data[0];
+      
+      const user = await userService.getUser(id);
+
+      response.status(200).json( user[0] );
+      // response.status(200).json({ data });
     })
     .catch((error) => {
-      response.status(500).json({ error });
+      response.status(500).json({ error: error.detail });
     });
 });
 
