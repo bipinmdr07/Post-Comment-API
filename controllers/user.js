@@ -11,17 +11,6 @@ router.get('/', async (request, response) => {
   }
 });
 
-// adding new user
-router.post('/', async (request, response) => {
-  const data = request.body;
-  data.password = bcrypt.hashSync(data.password, 10);
-  try {
-    response.status(201).json(await userService.addNewUser(data));
-  } catch (err) {
-    response.status(502).json({ err });
-  }
-});
-
 // getting particular user
 router.get('/:id', async (request, response) => {
   try {

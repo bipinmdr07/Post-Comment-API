@@ -2,8 +2,12 @@ const router = require('express').Router();
 const database = require('../db');
 
 // getting all post
-router.get('/', (request, response) => {
+router.get('/', async (request, response) => {
+  try {
+    
+  } catch (err) {
 
+  }
 });
 
 // adding new post

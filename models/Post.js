@@ -1,8 +1,8 @@
 const db = require('../db.js');
 const TABLE_NAME = 'posts';
 
-exports.getAllPosts = () => {
-  return db(TABLE_NAME).select()
+exports.getAllPosts = (userId) => {
+  return db(TABLE_NAME).select().where('user_id', userId);
 }
 
 exports.addNewPost = (data) => {

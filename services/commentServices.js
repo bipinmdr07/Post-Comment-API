@@ -1,17 +1,21 @@
-const db = require('../db');
+const Comment = require('../models/Comment');
 
 exports.getAllComments = (postId) => {
-  let comments = db('comments').select().where('post_id', [postId]);
+  let comments = Comment.getAllComments(postId);
+  return comments;
 }
 
 exports.addNewComment = (postId, data) => {
-  let comment = db('comments').insert(data, ['id', 'comment'])
+  let comment = Comment.addNewComment(data);
+  return comment;
 }
 
 exports.updateComment = (id, data) => {
-  let comment = db('comments').where('id', id).update(data, 'id');
+  let comment = Comment.updateComment(id, data);
+  return comment;
 }
 
 exports.deleteComment = (id) => {
-  let comment = db('comments').where('id', id).del();
+  let comment = Comment.deleteComment(id);
+  return comment;
 }

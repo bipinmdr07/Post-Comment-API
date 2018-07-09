@@ -1,21 +1,26 @@
-const db = require('../db');
+const Post = require('../models/Post');
 
 exports.getAllPosts = (userId) => {
-  let posts = db('posts').select().where('user_id', userId);
+  let posts = Post.getAllPosts(userId);
+  return posts
 }
 
 exports.addNewPost = (userId, data) => {
-  let post = db('posts').insert(data, ['id', 'post']);
+  let post = Post.addNewPost(data);
+  return post;
 }
 
 exports.getPost = (id) => {
-  let post = db('posts').select().where('id', id);
+  let post = Post.getPost(id);
+  return post;
 }
 
 exports.updatePost = (id, data) => {
-  let post = db('posts').select().where('id', id).update(data, [id]);
+  let post = Post.updatePost(id, data);
+  return post;
 }
 
 exports.deletePost = (id) => {
-  let post = db('posts').select().where('id', id).del();
+  let post = Post.deletePost(id);
+  return post;
 }

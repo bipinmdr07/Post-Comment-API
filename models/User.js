@@ -20,3 +20,7 @@ exports.updateUser = (id, data) => {
 exports.deleteUser = (id, data) => {
   return db(TABLE_NAME).select().where('id', id).del();
 }
+
+exports.checkForUser = (username) => {
+  return db(TABLE_NAME).select().where('username', username);
+}
