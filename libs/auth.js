@@ -14,6 +14,8 @@ exports.verifyJWTToken = (token) => {
 }
 
 exports.createJWTToken = (details) => {
+  console.log(details)
+  
   if (typeof(details) !== 'object') {
     details = {}
   }
@@ -29,6 +31,8 @@ exports.createJWTToken = (details) => {
     return memo;
   }, {});
 
+  console.log(details);
+
   let token = jwt.sign({
     data: details.sessionData
   }, process.env.JWT_SECRET, {
@@ -36,5 +40,11 @@ exports.createJWTToken = (details) => {
     algorithm: 'HS256',
   });
 
-  return token;
+  let refreshToken = jwt.sign({
+    data: details.sessionData
+  }, process.env.JWT_SECRET, {
+    algorithm: 'HS256',
+  });
+
+  return [token, refreshToken];
 }

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userService = require('../services/userServices');
+const bcrypt = require('bcrypt');
 
 // getting all users
 router.get('/', (request, response) => {
@@ -15,16 +16,14 @@ router.get('/', (request, response) => {
 
 // adding new user
 router.post('/', (request, response) => {
+  request.body.password = bcrypt.hashSync(request.body.password, 10);
   userService
     .addNewUser(request.body) 
-    .then(async (data) => {
-      // console.log(data);
-      const id = data[0];
-      
-      const user = await userService.getUser(id);
-
+    .then((data) => {
+      return userService.getUser(data[0]);
+    })
+    .then((user) => {
       response.status(200).json( user[0] );
-      // response.status(200).json({ data });
     })
     .catch((error) => {
       response.status(500).json({ error: error.detail });
