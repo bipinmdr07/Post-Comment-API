@@ -1,33 +1,52 @@
 const db = require('../db.js');
 const TABLE_NAME = 'posts';
-const COMMENT_TABLE_NAME = 'comments';
+// const COMMENT_TABLE_NAME = 'comments';
 
-exports.getAllPosts = (userId) => {
-  return db(TABLE_NAME).select().where('user_id', userId);
+const getAllPosts = (userId) => {
+  return db(TABLE_NAME)
+    .select()
+    .where('user_id', userId);
 }
 
-exports.addNewPost = (data) => {
-  return db(TABLE_NAME).insert(data, ['id']);
+const addNewPost = (userId, data) => {
+  const { post } = data;
+  return db(TABLE_NAME)
+    .insert({ 
+      post: post,
+      user_id: userId
+    }, ['id']);
 }
 
-exports.getPost = (id) => {
-  return db(TABLE_NAME).select().where('id', id)
+const getPost = (id, userId) => {
+  return db(TABLE_NAME)
+    .select()
+    .where({ id: id, user_id: userId })
     .then((data) => data[0]);
 }
 
-exports.updatePost = (id, data) => {
-   return db(TABLE_NAME).select().where('id', id).update(data);
+const updatePost = (id, data, userId) => {
+  return db(TABLE_NAME)
+    .select().where({
+      id: id,
+      user_id: userId
+    })
+    .update(data);
 }
 
-exports.deletePost = (id) => {
-  return db(TABLE_NAME).select().where('id', id).del();
+const deletePost = (id, userId) => {
+  return db(TABLE_NAME)
+    .select()
+    .where({
+      id: id,
+      user_id: userId
+    })
+    .del();
 }
 
-// get comments along with post and filter
-exports.getPostsWithCommentsForUser = (userId) => {
-  return db(TABLE_NAME).select().where('user_id', userId).innerJoin(COMMENT_TABLE_NAME, COMMENT_TABLE_NAME.postId, TABLE_NAME.id)
-}
-
-exports.getPostWithCommentsForUser = (userId, postId) => {
-  return db(TABLE_NAME).select().where('user_id', userId).where('post_id', postId).innerJoin(COMMENT_TABLE_NAME, COMMENT_TABLE_NAME.postId, TABLE_NAME.id);
+module.exports = {
+  getAllPosts,
+  addNewPost,
+  getPost,
+  updatePost,
+  deletePost
 }

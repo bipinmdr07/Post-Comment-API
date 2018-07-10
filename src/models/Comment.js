@@ -1,23 +1,33 @@
 const db = require('../db');
 const TABLE_NAME = 'comments';
 
-exports.getAllComments = () => {
-  return db(TABLE_NAME).select();
+const getAllComments = () => {
+  return db(TABLE_NAME)
+    .select();
 }
 
-exports.addNewComment = (data) => {
-  return db(TABLE_NAME).insert(data);
+const addNewComment = (data) => {
+  return db(TABLE_NAME)
+    .insert(data);
 }
 
-exports.updateComment = (id) => {
-  return db(TABLE_NAME).select().where('id', id).update(data);
+const updateComment = (id) => {
+  return db(TABLE_NAME)
+    .select()
+    .where('id', id)
+    .update(data);
 }
 
-exports.deleteComment = (id) => {
-  return db(TABLE_NAME).select().where('id', id).del();
+const deleteComment = (id) => {
+  return db(TABLE_NAME)
+    .select()
+    .where('id', id)
+    .del();
 }
 
-// filtering the data
-exports.getCommentsForPost = (postId) => {
-  getAllComments.where('post_id', postId);
+module.exports = {
+  getAllComments,
+  addNewComment,
+  updateComment,
+  deleteComment
 }

@@ -1,15 +1,14 @@
 const verifyJWTToken = require('./utils/auth').verifyJWTToken;
 
-exports.authorize = (req, res, next) => {  
-  const token = req.headers.authorization;
-  // console.log(token);
+exports.authorize = (request, response, next) => {  
+  const token = request.headers.authorization;
 
   verifyJWTToken(token)
     .then((decodedToken) => {
-      req.user = decodedToken.details;
+      request.user = decodedToken.data;
       next();
     })
     .catch((err) => {
-      res.status(400).json({ message: "Invalid auth token provided." });
+      response.status(400).json({ message: "Invalid auth token provided." });
     });
 }

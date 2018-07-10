@@ -1,21 +1,24 @@
-const Comment = require('../models/Comment');
+const commentModel = require('../models/Comment');
 
-exports.getAllComments = (postId) => {
-  let comments = Comment.getAllComments(postId);
-  return comments;
+const getAllComments = (postId) => {
+  return commentModel.getAllComments(postId);
 }
 
-exports.addNewComment = (postId, data) => {
-  let comment = Comment.addNewComment(data);
-  return comment;
+const addNewComment = (postId, data) => {
+  return commentModel.addNewComment(data);
 }
 
-exports.updateComment = (id, data) => {
-  let comment = Comment.updateComment(id, data);
-  return comment;
+const updateComment = (id, data) => {
+  return commentModel.updateComment(id, data);
 }
 
-exports.deleteComment = (id) => {
-  let comment = Comment.deleteComment(id);
-  return comment;
+const deleteComment = (id) => {
+  return commentModel.deleteComment(id);
+}
+
+module.exports = {
+  getAllComments,
+  addNewComment,
+  updateComment,
+  deleteComment
 }

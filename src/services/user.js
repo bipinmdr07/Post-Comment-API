@@ -1,26 +1,29 @@
-const User = require('../models/User');
+const userModel = require('../models/User');
 
-exports.getAllUsers = () => {
-  let response = User.getAllUsers();
-  return response;
+const getAllUsers = () => {
+  return userModel.getAllUsers();
 }
 
-exports.addNewUser = (data) => {
-  let response = User.addNewUser(data)
-  return response;
+const addNewUser = (data) => {
+  return userModel.addNewUser(data)
 }
 
-exports.getUser = (id) => {
-  let response = User.getUser(id);
-  return response;
+const getUser = (id) => {
+  return userModel.getUser(id);
 }
 
-exports.updateUser = (id) => {
-  let response = User.updateUser(id);
-  return response;
+const updateUser = (id) => {
+  return userModel.updateUser(id);
 }
 
-exports.deleteUser = (id) => {
-  let response = User.deleteUser(id);
-  return response;
+const deleteUser = (id) => {
+  return userModel.deleteUser(id);
+}
+
+module.exports = {
+  getAllUsers,
+  addNewUser,
+  getUser,
+  updateUser,
+  deleteUser
 }

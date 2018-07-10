@@ -1,36 +1,29 @@
-const Post = require('../models/Post');
+const postModel = require('../models/Post');
 
-exports.getAllPosts = (userId) => {
-  let posts = Post.getAllPosts(userId);
-  return posts
+const getAllPosts = (userId) => {
+  return postModel.getAllPosts(userId);
 }
 
-exports.addNewPost = (userId, data) => {
-  let post = Post.addNewPost(data);
-  return post;
+const addNewPost = (userId, data) => {
+  return postModel.addNewPost(userId, data);
 }
 
-exports.getPost = (id) => {
-  let post = Post.getPost(id);
-  return post;
+const getPost = (id, userId) => {
+  return postModel.getPost(id, userId);
 }
 
-exports.updatePost = (id, data) => {
-  let post = Post.updatePost(id, data);
-  return post;
+const updatePost = (id, data, userId) => {
+  return postModel.updatePost(id, data, userId);
 }
 
-exports.deletePost = (id) => {
-  let post = Post.deletePost(id);
-  return post;
+const deletePost = (id, userId) => {
+  return postModel.deletePost(id, userId);
 }
 
-exports.getPostsWithCommentsForUser = (userId) => {
-  let postsComments = Post.getPostsWithCommentsForUser(userId);
-  return postsComments;
-}
-
-exports.getPostWithCommentsForUser = (userId, postId) => {
-  let postComments = Post.getPostWithCommentsForUser(userId, postId);
-  return postComments;
+module.exports = {
+  getAllPosts,
+  addNewPost,
+  getPost,
+  updatePost,
+  deletePost
 }
