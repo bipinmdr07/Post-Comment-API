@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "knex seed:run --knexfile src/knexfile.js",
+    "build": "rimraf dist && babel src -D --out-dir dist",
+    "migrate": "knex migrate:latest --knexfile src/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile src/knexfile.js",
+    "make:seeder": "knex seed:make --knexfile src/knexfile.js",
+    "make:migration": "knex migrate:make --knexfile src/knexfile.js"
   },
   "author": "Bipin Manandhar",
   "license": "ISC",
