@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const postServices = require('../services/postServices');
+const postServices = require('../services/post');
 const authorize = require('../middlewares').authorize;
 
 // getting all post

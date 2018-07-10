@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const userService = require('../services/userServices');
+const userService = require('../services/user');
 const bcrypt = require('bcrypt');
 
 // getting all users

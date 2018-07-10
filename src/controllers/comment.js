@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const commentServices = require('../services/commentServices');
+const commentServices = require('../services/comment');
 
 // getting all comments
 router.get('/', async (request, response) => {

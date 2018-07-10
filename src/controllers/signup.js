@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 
-const userService = require('../services/userServices');
+const userService = require('../services/user');
 
 router.post('/', async (request, response) => {
   const data = request.body;
