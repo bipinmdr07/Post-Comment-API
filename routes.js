@@ -16,7 +16,7 @@ router.get('/', (request, response) => {
   });
 });
 
-// router.use("/refresh", refreshTokenController);
+router.use("/refresh", refreshTokenController);
 router.use("/signup", signupController);
 router.use("/login", loginController);
 router.use("/users", userController);

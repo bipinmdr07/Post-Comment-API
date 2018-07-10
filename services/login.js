@@ -6,13 +6,8 @@ const RefreshTokenModel = require('../models/RefreshToken');
 
 exports.checkForUser = async (req) => {
   const {username, password} = req;
-
-  console.log(password);
-
   const user = await User.checkForUser(username);
-  let payload = null;
-  console.log(user[0].password);
-  console.log(bcrypt.compareSync(password, user[0].password));  
+  let payload = null;  
   
   if (bcrypt.compareSync(password, user[0].password)) {
     payload = {id: user[0].id, username: user[0].username};
@@ -30,7 +25,12 @@ exports.checkForUser = async (req) => {
       })
     });
 
-    await RefreshTokenModel.insertRefreshTokenInTable(payload.id, tokens.refreshToken);
+    const x = await RefreshTokenModel.findRefreshTokenByUserId(payload.id);
+    if (x.length === 0){
+      await RefreshTokenModel.insertRefreshTokenInTable(payload.id, tokens.refreshToken);
+    } else {
+      await RefreshTokenModel.updateRefreshTokenInTable(payload.id, tokens.refreshToken);
+    }
     return tokens;
   } else {
     throw new Error("invalid credentials");

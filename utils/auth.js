@@ -14,10 +14,11 @@ exports.verifyJWTToken = (token) => {
 }
 
 exports.createJWTToken = (details) => {
+  console.log(details);
   let token = null;
-  if (typeof(details.validTimePeriod) !== 'undefined') {
+  if (typeof details.validTimePeriod !== 'undefined') {
     token = jwt.sign({
-      data: details.sessionData
+      data: details.sessionData,
     }, process.env.JWT_SECRET, {
       expiresIn: details.validTimePeriod,
       algorithm: 'HS256',
