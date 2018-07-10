@@ -24,3 +24,13 @@ exports.deletePost = (id) => {
   let post = Post.deletePost(id);
   return post;
 }
+
+exports.getPostsWithCommentsForUser = (userId) => {
+  let postsComments = Post.getPostsWithCommentsForUser(userId);
+  return postsComments;
+}
+
+exports.getPostWithCommentsForUser = (userId, postId) => {
+  let postComments = Post.getPostWithCommentsForUser(userId, postId);
+  return postComments;
+}

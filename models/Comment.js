@@ -16,3 +16,8 @@ exports.updateComment = (id) => {
 exports.deleteComment = (id) => {
   return db(TABLE_NAME).select().where('id', id).del();
 }
+
+// filtering the data
+exports.getCommentsForPost = (postId) => {
+  getAllComments.where('post_id', postId);
+}

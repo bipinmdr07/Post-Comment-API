@@ -1,7 +1,8 @@
-const verifyJWTToken = require('./libs/auth').verifyJWTToken();
+const verifyJWTToken = require('./utils/auth').verifyJWTToken;
 
-exports.verifyJWTMiddleware = (req, res, next) => {
-  let token = (req.method === 'POST')? req.body.token : req.query.token;
+exports.authorize = (req, res, next) => {  
+  const token = req.headers.authorization;
+  // console.log(token);
 
   verifyJWTToken(token)
     .then((decodedToken) => {

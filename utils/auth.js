@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const lodash = require('lodash');
+// const lodash = require('lodash');
 
 exports.verifyJWTToken = (token) => {
   return new Promise((resolve, reject) => {

@@ -1,17 +1,19 @@
 const router = require('express').Router();
 const postServices = require('../services/postServices');
+const authorize = require('../middlewares').authorize;
 
 // getting all post
-router.get('/', async (request, response) => {
+router.get('/', authorize, async (request, response) => {
   try {
+    console.log(get);
     response.status(200).json(await postServices.getAllPosts());
   } catch (err) {
-    responst.status(404).json({ err });
+    response.status(404).json({ err: "Not found" });
   }
 });
 
 // adding new post
-router.post('/', async (request, response) => {
+router.post('/', authorize, async (request, response) => {
   try {
     response.status(201).json(await postServices.addNewPost(request.body));
   } catch (err) {
@@ -29,7 +31,7 @@ router.get('/:id', async (request, response) => {
 });
 
 // updating particular post
-router.put('/:id', async (request, response) => {
+router.put('/:id', authorize, async (request, response) => {
   try {
     response.status(200).json(await postServices.updatePost(request.params.id));
   } catch (err) {
