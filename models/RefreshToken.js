@@ -6,7 +6,7 @@ exports.checkForTokenInTable = (token) => {
 }
 
 exports.insertRefreshTokenInTable = (userId, token) => {
-  return model(TABLE_NAME).insert({userId: userId, token: token});
+  return model(TABLE_NAME).insert({"user_id": userId, "refresh_token": token});
 }
 
 exports.deleteRefreshTokenFromTable = (userId) => {

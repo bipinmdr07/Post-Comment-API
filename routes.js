@@ -6,7 +6,7 @@ const postController = require('./controllers/post');
 const commentController = require('./controllers/comment');
 const signupController = require('./controllers/signup');
 const loginController = require('./controllers/login');
-const refrestTokenController = require('./controllers/refreshToken');
+const refreshTokenController = require('./controllers/refreshToken');
 
 const auth = require('./utils/auth');
 
@@ -16,7 +16,7 @@ router.get('/', (request, response) => {
   });
 });
 
-router.use("/refresh", refrestTokenController);
+// router.use("/refresh", refreshTokenController);
 router.use("/signup", signupController);
 router.use("/login", loginController);
 router.use("/users", userController);
