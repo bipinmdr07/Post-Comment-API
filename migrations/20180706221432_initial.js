@@ -28,6 +28,6 @@ exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('users'),
     knex.schema.dropTable('posts'),
-    kenx.schema.dropTable('comments'),
+    knex.schema.dropTable('comments'),
   ])
 };

@@ -5,10 +5,9 @@ const authorize = require('../middlewares').authorize;
 // getting all post
 router.get('/', authorize, async (request, response) => {
   try {
-    console.log(get);
     response.status(200).json(await postServices.getAllPosts());
   } catch (err) {
-    response.status(404).json({ err: "Not found" });
+    response.status(404).json({ err: 'Not found' });
   }
 });
 
@@ -26,7 +25,7 @@ router.get('/:id', async (request, response) => {
   try {
     response.status(200).json(await postServices.getPost(request.params.id));
   } catch (err) {
-    responsse.status(404).json({ err });
+    response.status(404).json({ err });
   }
 });
 

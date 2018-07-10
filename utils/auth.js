@@ -7,14 +7,12 @@ exports.verifyJWTToken = (token) => {
       if (err || !decodedToken) {
         return reject(err);
       }
-
       resolve(decodedToken);
     });
   });
 }
 
 exports.createJWTToken = (details) => {
-  console.log(details);
   let token = null;
   if (typeof details.validTimePeriod !== 'undefined') {
     token = jwt.sign({
@@ -26,7 +24,7 @@ exports.createJWTToken = (details) => {
   // token without expiry
   } else {
     token = jwt.sign({
-      data: details.sessionData
+      data: details.sessionData,
     }, process.env.JWT_SECRET, {
       algorithm: 'HS256'
     });

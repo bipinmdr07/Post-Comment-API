@@ -15,6 +15,7 @@ module.exports = {
     seeds: {
       directory: './seeds'
     },
+    // debug: true,
     useNullAsDefault: true
   },
 
