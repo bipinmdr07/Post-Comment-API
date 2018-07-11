@@ -7,6 +7,7 @@ const commentController = require('./controllers/comment');
 const signupController = require('./controllers/signup');
 const loginController = require('./controllers/login');
 const refreshTokenController = require('./controllers/refreshToken');
+const authorize = require('./middlewares').authorize;
 
 const auth = require('./utils/auth');
 
@@ -21,6 +22,6 @@ router.use("/signup", signupController);
 router.use("/login", loginController);
 router.use("/users", userController);
 router.use("/posts", postController);
-router.use("/comments", commentController);
+router.use("/comments", authorize, commentController);
 
 module.exports = router;

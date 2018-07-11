@@ -1,27 +1,30 @@
 const db = require('../db');
 const TABLE_NAME = 'comments';
 
-const getAllComments = () => {
-  return db(TABLE_NAME)
-    .select();
-}
-
-const addNewComment = (data) => {
-  return db(TABLE_NAME)
-    .insert(data);
-}
-
-const updateComment = (id) => {
+const getAllComments = (postId) => {
   return db(TABLE_NAME)
     .select()
-    .where('id', id)
+    .where('post_id', postId);
+}
+
+const addNewComment = (postId, data, userId) => {
+  const { comment } = data;
+  console.log(comment)
+  return db(TABLE_NAME)
+    .insert({ comment: comment, post_id: postId, user_id: userId });
+}
+
+const updateComment = (id, data, userId) => {
+  return db(TABLE_NAME)
+    .select()
+    .where({id: id, user_id: userId})
     .update(data);
 }
 
-const deleteComment = (id) => {
+const deleteComment = (id, userId) => {
   return db(TABLE_NAME)
     .select()
-    .where('id', id)
+    .where({id: id, user_id, userId})
     .del();
 }
 

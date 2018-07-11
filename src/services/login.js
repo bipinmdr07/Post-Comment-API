@@ -4,6 +4,21 @@ const User = require('../models/User');
 const auth = require('../utils/auth');
 const RefreshTokenModel = require('../models/RefreshToken');
 
+/**
+ * When user login by providing the username and password,
+ * first we will check for the existence of user in the database using the username provided by the user,
+ * then we will show error if the user does not exists, else we will validate the password provided by the user,
+ * If both matched then we will extract the username and id of the user for JWT payload and pass it to generate
+ * two tokens
+ * 1. authorize_token: token
+ * 2. refresh_token: refreshToken
+ * 
+ * and send it back to front end
+ * 
+ * @param {object} req 
+ * 
+ * @returns Object
+ */
 exports.checkForUser = async (req) => {
   const {username, password} = req;
   const user = await User.checkForUser(username);
@@ -18,7 +33,7 @@ exports.checkForUser = async (req) => {
       success: true,
       token: auth.createJWTToken({
         sessionData: payload,
-        validTimePeriod: 60
+        validTimePeriod: '155 d'
       }),
       refreshToken: auth.createJWTToken({
         sessionData: payload

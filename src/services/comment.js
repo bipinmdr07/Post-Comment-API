@@ -1,21 +1,52 @@
 const commentModel = require('../models/Comment');
 
-const getAllComments = (postId) => {
-  return commentModel.getAllComments(postId);
+/**
+ * 
+ * @param {number} postId 
+ * @param {number} userId 
+ * 
+ * @returns promise
+ */
+const getAllComments = (postId, userId) => {
+  return commentModel.getAllComments(postId, userId);
 }
 
-const addNewComment = (postId, data) => {
-  return commentModel.addNewComment(data);
+/**
+ * 
+ * @param {number} postId 
+ * @param {object} data 
+ * @param {number} userId 
+ * 
+ * @returns promise
+ */
+const addNewComment = (postId, data, userId) => {
+  return commentModel.addNewComment(postId, data, userId);
 }
 
-const updateComment = (id, data) => {
-  return commentModel.updateComment(id, data);
+/**
+ * 
+ * @param {number} id 
+ * @param {object} data 
+ * @param {number} userId 
+ * 
+ * @returns promise
+ */
+const updateComment = (id, data, userId) => {
+  return commentModel.updateComment(id, data, userId);
 }
 
-const deleteComment = (id) => {
-  return commentModel.deleteComment(id);
+/**
+ * 
+ * @param {number} id 
+ * @param {number} userId 
+ * 
+ * @returns promise
+ */
+const deleteComment = (id, userId) => {
+  return commentModel.deleteComment(id, userId);
 }
 
+// exporting the functions
 module.exports = {
   getAllComments,
   addNewComment,

@@ -9,7 +9,7 @@ router.post('/', async (request, response) => {
     const tokens = await loginServices.checkForUser(request.body);
     response.status(200).json(tokens);
   } catch (err) {
-    response.status(404).json({message: "Invalid User Credentials"});
+    response.status(404).json({ error: "Invalid User Credentials" });
   }
 });
 
