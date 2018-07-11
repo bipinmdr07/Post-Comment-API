@@ -1,4 +1,4 @@
-require('dotenv').config({path: `${__dirname}/.env`});
+require('dotenv').config({path: `${__dirname}/../.env`});
 
 module.exports = {
 
@@ -15,6 +15,7 @@ module.exports = {
     seeds: {
       directory: './seeds'
     },
+    // debug: true,
     useNullAsDefault: true
   },
 
