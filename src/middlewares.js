@@ -10,5 +10,11 @@ exports.authorize = (request, response, next) => {
     })
     .catch((err) => {
       response.status(400).json({ message: "Invalid auth token provided." });
+      next(err);
     });
+}
+
+exports.logger = (err, req, res, next) => {
+  console.log(err);
+  next(err);
 }
